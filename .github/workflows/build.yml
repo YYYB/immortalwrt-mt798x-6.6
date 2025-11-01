@@ -1,7 +1,7 @@
 name: Build ImmortalWrt
 
 on:
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   build:
@@ -25,7 +25,9 @@ jobs:
           ./scripts/feeds install -a
 
       - name: Copy config
-        run: cp .config .config.bak && make defconfig
+        run: |
+          cp .config .config.bak
+          make defconfig
 
       - name: Download
         run: make download -j8
